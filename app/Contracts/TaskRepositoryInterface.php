@@ -9,7 +9,7 @@ interface TaskRepositoryInterface{
     /**
      * Fetch all the tasks
      */
-    public function getAllTasks(string $task);
+    public function getAllTasks();
 
     /**
      * Add new task
