@@ -5,7 +5,8 @@ namespace App\Contracts;
 /**
  * Interface for all the task related things
  */
-interface TaskRepositoryInterface{
+interface TaskRepositoryInterface
+{
     /**
      * Fetch all the tasks
      */

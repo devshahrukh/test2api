@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Contracts\TaskRepositoryInterface;
 
-class TaskController extends Controller{
+class TaskController extends Controller
+{
     /**
      * @var TaskRepositoryInterface
      */
-	protected $taskRepository;
+    protected $taskRepository;
 
     public function __construct(TaskRepositoryInterface $taskRepository)
     {
-    	$this->taskRepository = $taskRepository;
+        $this->taskRepository = $taskRepository;
     }
 
     /**
@@ -23,20 +24,19 @@ class TaskController extends Controller{
      */
     public function index(): JsonResponse
     {
-    	try{
-    		$tasks = $this->taskRepository->getAllTasks();
+        try {
+            $tasks = $this->taskRepository->getAllTasks();
 
-    		return response()->json([
-    			'error' 	=> false,
-    			'data' 		=>  $tasks
-    		]);
-    	}
-    	catch(Exception $e){
-    		return response()->json([
-    			'error' => true,
-    			'message' => $e->getMessage()
-    		], 500);
-    	}
+            return response()->json([
+                'error' => false,
+                'data' => $tasks
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -46,19 +46,18 @@ class TaskController extends Controller{
      */
     public function store(Request $req): JsonResponse
     {
-    	try{
-    		$this->taskRepository->addTask($req->task);
+        try {
+            $this->taskRepository->addTask($req->task);
 
-    		return response()->json([
-    			'error' => false,
-    			'message' => 'Task added succesfully'
-    		], 201);
-    	}
-    	catch(Exception $e){
-    		return response()->json([
-    			'error' => true,
-    			'message' => $e->getMessage()
-    		], 500);
-    	}
+            return response()->json([
+                'error' => false,
+                'message' => 'Task added succesfully'
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 }

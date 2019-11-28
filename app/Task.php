@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [
-    	'title', 
+        'title',
     ];
 
     protected $hidden = [
-    	'created_at', 'updated_at', 
+        'created_at', 'updated_at',
     ];
 }

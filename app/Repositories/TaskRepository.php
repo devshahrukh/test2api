@@ -11,49 +11,47 @@ use App\Contracts\TaskRepositoryInterface;
  *
  * @package App\Repositories
  */
-class TaskRepository implements TaskRepositoryInterface{
+class TaskRepository implements TaskRepositoryInterface
+{
+    /**
+     * Task Model
+     */
+    protected $task;
 
-	/**
-	 * Task Model
-	 */
-	protected $task;
+    public function __construct(Task $task)
+    {
+        $this->task = $task;
+    }
 
-	public function __construct(Task $task)
-	{
-		$this->task = $task;
-	}
+    /**
+     * Add the new task
+     * @param string $task
+     * @return mixed
+     */
+    public function getAllTasks()
+    {
+        try {
+            return $this->task->get();
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
 
-	/**
-	 * Add the new task
-	 * @param string $task
-	 * @return mixed
-	 */
-	public function getAllTasks()
-	{
-		try{			
-			return $this->task->get();
-		}
-		catch(Exception $e){
-			return $e;
-		}
-	}
+    /**
+     * Add the new task
+     * @param string $task
+     * @return mixed
+     */
+    public function addTask(string $task)
+    {
+        try {
+            $task = $this->task->create([
+                'title' => $task
+            ]);
 
-	/**
-	 * Add the new task
-	 * @param string $task
-	 * @return mixed
-	 */
-	public function addTask(string $task)
-	{
-		try{
-			$task = $this->task->create([
-				'title' => $task
-			]);
-			
-			return true;
-		}
-		catch(Exception $e){
-			return $e;
-		}
-	}
+            return true;
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
 }
